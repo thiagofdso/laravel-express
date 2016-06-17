@@ -12,41 +12,27 @@
 */
 
 Route::get('/', function () {
-//    return view('welcome');
     return view('home');
 });
 
-Route::get('/auth/register', function () {
-    return view('auth.register');
-});
+Route::get('/olamundo/{nome}', [
+    'middleware' => 'auth',
+    'uses' => 'TesteController@index'
+]);
+
 
 Route::get('/blog/index', "BlogController@index");
 Route::post('/blog/adicionar', "BlogController@adicionar");
 Route::post('/blog/remover/{id}', "BlogController@remover");
 
-Route::get('/auth/login', function () {
-    return view('auth.login');
-});
+Route::get('/auth/login','Auth\AuthController@logar');
 Route::get('/auth/logout', function () {
     Auth::logout();
     return  redirect('/');
 });
+//Route::get('/auth/logout', 'Auth\AuthController@sair');
 Route::get('/auth/index',  'Auth\AuthController@index');
+Route::get('/auth/register', 'Auth\AuthController@registrar');
 Route::post('auth/register', 'Auth\AuthController@create');
-//Route::post('auth/login' , 'Auth\AuthController@autentica');
-Route::post('auth/login' , function (App\Http\Requests\UserRequest $request) {
-    $data = $request->all();
-    $user = App\User::findByEmail($data['email']);
-    Auth::login($user);
+Route::post('auth/login' , 'Auth\AuthController@acessar');
 
-
-    return  redirect('/');
-
-});
-
-
-//Route::get('/olamundo/{nome}', "TesteController@index");
-Route::get('/olamundo/{nome}', [
-    'middleware' => 'auth',
-    'uses' => 'TesteController@index'
-]);

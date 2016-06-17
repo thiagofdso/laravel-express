@@ -6,6 +6,7 @@ use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
@@ -39,6 +40,14 @@ class AuthController extends Controller
     public function __construct()
     {
         $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
+    }
+
+
+    protected function logar(){
+        return view('auth.login');
+    }
+    protected function registrar(){
+        return view('auth.register');
     }
 
     /**
@@ -85,17 +94,22 @@ class AuthController extends Controller
         ]);
         return  redirect('/');
     }
-
-    protected function autentica(UserRequest $request)
+    /**
+     * Create a new user instance after a valid registration.
+     *
+     * @param  array  $data
+     * @return User
+     */
+    protected function acessar(UserRequest $request)
     {
         $data = $request->all();
         $user = User::findByEmail($data['email']);
-        /*return $user->getAuthPassword()."<br>".bcrypt($data['password']);
-        if($user->getAuthPassword() == bcrypt($data['password']))
-            Auth::login($user);*/
         Auth::login($user);
-
-
+        return redirect('/');
+    }
+    protected function sair()
+    {
+        Auth::logout();
         return  redirect('/');
     }
 }
