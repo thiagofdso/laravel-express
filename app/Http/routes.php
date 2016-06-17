@@ -20,6 +20,8 @@ Route::get('/auth/register', function () {
     return view('auth.register');
 });
 
+Route::get('/blog/index', "Blog@index");
+
 Route::get('/auth/login', function () {
     return view('auth.login');
 });
@@ -27,7 +29,7 @@ Route::get('/auth/logout', function () {
     Auth::logout();
     return  redirect('/');
 });
-Route::get('/auth/index', 'Auth\AuthController@index');
+Route::get('/auth/index',  'Auth\AuthController@index');
 Route::post('auth/register', 'Auth\AuthController@create');
 //Route::post('auth/login' , 'Auth\AuthController@autentica');
 Route::post('auth/login' , function (App\Http\Requests\UserRequest $request) {

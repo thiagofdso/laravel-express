@@ -34,6 +34,7 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/') }}">Pagina Inicial</a></li>
+					<li><a href="{{ url('/blog/index') }}">Blog Thiago</a></li>
 					<li><a href="{{ url('/olamundo/thiago') }}">Ola Mundo</a></li>
 					<li><a href="{{ url('/auth/index') }}">Usuarios</a></li>
 				</ul>
