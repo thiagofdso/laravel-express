@@ -20,10 +20,6 @@ php artisan make:model Post
         $posts = Post::all();
         return view('/blog/index',['posts'=>$posts]);
     }
-    protected  function  index(){
-        $posts = Post::all();
-        return view('/blog/index',['posts'=>$posts]);
-    }
     protected  function  adicionar(Request $request){
         $data = $request->all();
         Post::create([
