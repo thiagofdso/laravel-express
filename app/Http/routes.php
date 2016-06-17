@@ -20,7 +20,9 @@ Route::get('/auth/register', function () {
     return view('auth.register');
 });
 
-Route::get('/blog/index', "Blog@index");
+Route::get('/blog/index', "BlogController@index");
+Route::post('/blog/adicionar', "BlogController@adicionar");
+Route::post('/blog/remover/{id}', "BlogController@remover");
 
 Route::get('/auth/login', function () {
     return view('auth.login');
